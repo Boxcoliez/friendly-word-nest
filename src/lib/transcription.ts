@@ -202,6 +202,9 @@ export const transcribeAudio = async (
     .split(/\s+/)
     .filter(word => word.length > 0 && /\S/.test(word))
     .length;
+  
+  // Character count (excluding whitespace)
+  const charCount = transcribedText.replace(/\s/g, '').length;
 
   const result: TranscriptionResult = {
     fileName: audioFile.file.name,
@@ -213,6 +216,7 @@ export const transcribeAudio = async (
     timestamp: new Date().toLocaleString(),
     audioUrl: audioFile.url,
     wordCount,
+    charCount,
   };
 
   onProgress(100);

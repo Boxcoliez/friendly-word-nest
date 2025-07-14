@@ -32,6 +32,7 @@ interface TranscriptionResult {
   timestamp: string;
   audioUrl: string;
   wordCount: number;
+  charCount: number;
 }
 
 interface TranscriptionHistoryProps {

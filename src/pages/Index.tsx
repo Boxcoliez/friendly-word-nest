@@ -31,6 +31,7 @@ const Index = () => {
   const [apiStatus, setApiStatus] = useState<'ready' | 'pending' | 'error'>('pending');
   const [isDark, setIsDark] = useState(false);
   const [transcriptionResult, setTranscriptionResult] = useState<TranscriptionResult | null>(null);
+  const [latestTranscription, setLatestTranscription] = useState<TranscriptionResult | null>(null);
 
   // Initialize theme
   useEffect(() => {
@@ -78,6 +79,7 @@ const Index = () => {
       });
       
       setTranscriptionResult(result);
+      setLatestTranscription(result); // Update latest transcription for history
     } catch (error) {
       console.error('Transcription failed:', error);
       throw error; // Re-throw to be handled by AudioUploader
@@ -130,7 +132,7 @@ const Index = () => {
       <section className="pt-5 pb-12 bg-muted/30">
         <div className="container px-4">
           <div className="animate-fade-in" style={{ animationDelay: '0.6s' }}>
-            <TranscriptionHistory onLoadTranscription={handleLoadTranscription} />
+            <TranscriptionHistory onLoadTranscription={handleLoadTranscription} latestResult={latestTranscription} />
           </div>
         </div>
       </section>
